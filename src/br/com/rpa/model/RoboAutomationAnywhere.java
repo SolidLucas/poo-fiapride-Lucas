@@ -3,7 +3,7 @@ package br.com.rpa.model;
 /**
  * Bot do Automation Anywhere, disparado pelo Control Room.
  */
-public class RoboAutomationAnywhere extends Robo {
+public class RoboAutomationAnywhere extends Robo implements Notificavel {
 
     private final int botRunnersDisponiveis;
 
@@ -21,6 +21,11 @@ public class RoboAutomationAnywhere extends Robo {
     @Override
     public double estimarTempoExecucao(int quantidadeItens) {
         return 20 + (quantidadeItens * segundosPorItem) / botRunnersDisponiveis;
+    }
+
+    @Override
+    public void notificar(String mensagem) {
+        System.out.println("[" + CANAL_PADRAO + "] (via Control Room) " + getNome() + ": " + mensagem);
     }
 
     public int getBotRunnersDisponiveis() {

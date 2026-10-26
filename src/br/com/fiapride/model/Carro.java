@@ -3,7 +3,7 @@ package br.com.fiapride.model;
 /**
  * Carro É-UM Veiculo: herda placa, modelo e lotação da mãe.
  */
-public class Carro extends Veiculo {
+public class Carro extends Veiculo implements Rastreavel {
 
     private final int quantidadePortas;
     private final double capacidadeTanqueLitros;
@@ -37,6 +37,11 @@ public class Carro extends Veiculo {
     @Override
     public double calcularPrecoPorKm() {
         return 2.10;
+    }
+
+    @Override
+    public String obterLocalizacao() {
+        return PREFIXO_RASTREIO + getPlaca() + " -> Rua Vergueiro, 3185";
     }
 
     @Override

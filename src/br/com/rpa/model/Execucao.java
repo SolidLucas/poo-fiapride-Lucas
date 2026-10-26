@@ -41,8 +41,14 @@ public class Execucao {
         }
         robo.registrarExecucao(totalItens - itensComErro, itensComErro);
         concluida = true;
-        System.out.printf("[%s] lote \"%s\": %d itens, %d com erro.%n",
-                robo.getNome(), descricaoLote, totalItens, itensComErro);
+        String resumo = String.format("lote \"%s\": %d itens, %d com erro.",
+                descricaoLote, totalItens, itensComErro);
+        // Só avisa o time se o robô assinou o contrato Notificavel
+        if (robo instanceof Notificavel notificavel) {
+            notificavel.notificar(resumo);
+        } else {
+            System.out.println("[" + robo.getNome() + "] " + resumo);
+        }
     }
 
     public Robo getRobo() {
