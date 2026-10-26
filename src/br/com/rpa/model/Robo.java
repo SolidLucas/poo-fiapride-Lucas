@@ -12,6 +12,25 @@ public class Robo {
     private int itensComErro;
 
     /**
+     * Construtor padrão: robô ainda sem configuração definida.
+     */
+    public Robo() {
+        this("Robô sem nome", "Não definida");
+    }
+
+    /**
+     * Cria um robô em Python, a plataforma padrão da equipe.
+     */
+    public Robo(String nome) {
+        this(nome, "Python");
+    }
+
+    public Robo(String nome, String plataforma) {
+        setNome(nome);
+        setPlataforma(plataforma);
+    }
+
+    /**
      * Registra o resultado de uma execução do robô.
      *
      * @param sucesso quantidade de itens processados com sucesso

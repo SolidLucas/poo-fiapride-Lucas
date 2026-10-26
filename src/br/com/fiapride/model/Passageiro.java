@@ -11,6 +11,34 @@ public class Passageiro {
     private double saldo;
 
     /**
+     * Construtor padrão: cria um passageiro convidado, sem saldo.
+     * Usa this(...) para reaproveitar o construtor completo em vez de duplicar regras.
+     */
+    public Passageiro() {
+        this("Passageiro Convidado", 0.0);
+    }
+
+    /**
+     * Cria um passageiro novo, que começa sem saldo.
+     */
+    public Passageiro(String nome) {
+        this(nome, 0.0);
+    }
+
+    /**
+     * Construtor completo: único ponto que realmente inicializa o objeto.
+     *
+     * @param nome         nome do passageiro
+     * @param saldoInicial saldo de boas-vindas (não pode ser negativo)
+     */
+    public Passageiro(String nome, double saldoInicial) {
+        setNome(nome);
+        if (saldoInicial > 0) {
+            this.saldo = saldoInicial;
+        }
+    }
+
+    /**
      * Adiciona créditos à carteira. Centralizar a regra aqui evita que
      * alguém espalhe "saldo = saldo + x" pelo código sem validar nada.
      *

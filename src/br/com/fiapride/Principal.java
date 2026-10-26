@@ -1,18 +1,24 @@
 package br.com.fiapride;
 
 import br.com.fiapride.model.Passageiro;
+import br.com.fiapride.model.Veiculo;
 
 public class Principal {
 
     public static void main(String[] args) {
-        Passageiro ana = new Passageiro();
-        ana.setNome("Ana Silva");
-        ana.setNome("   "); // barrado: nome em branco
-        ana.adicionarSaldo(50.0);
+        // Três formas de nascer, todas válidas graças aos construtores
+        Passageiro convidado = new Passageiro();
+        Passageiro bruno = new Passageiro("Bruno Costa");
+        Passageiro ana = new Passageiro("Ana Silva", 50.0);
 
-        // ana.saldo = 1_000_000; -> não compila mais! O atributo é private.
+        convidado.exibirDados();
+        bruno.exibirDados();
+        ana.exibirDados();
 
-        ana.pagar(35.90);
-        System.out.printf("%s ficou com R$ %.2f%n", ana.getNome(), ana.getSaldo());
+        Veiculo onix = new Veiculo("ABC1234", "Chevrolet Onix");
+        onix.exibirInfo();
+        onix.atualizarPlaca("ABC1D23", "");              // recusado
+        onix.atualizarPlaca("ABC1D23", "DETRAN-2026-0042"); // processo oficial
+        onix.exibirInfo();
     }
 }
