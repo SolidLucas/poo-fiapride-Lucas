@@ -8,8 +8,11 @@ public class PrincipalRpa {
         Robo roboNotas = new Robo();
         roboNotas.nome = "Leitor de Notas Fiscais";
         roboNotas.plataforma = "Python";
-        roboNotas.itensProcessados = 0;
 
-        System.out.println("Robô: " + roboNotas.nome + " (" + roboNotas.plataforma + ")");
+        roboNotas.registrarExecucao(95, 5);
+        roboNotas.registrarExecucao(-10, 0); // barrado
+
+        System.out.printf("%s -> taxa de sucesso: %.1f%%%n",
+                roboNotas.nome, roboNotas.calcularTaxaSucesso());
     }
 }

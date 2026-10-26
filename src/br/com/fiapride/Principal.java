@@ -9,11 +9,16 @@ public class Principal {
         ana.nome = "Ana Silva";
         ana.saldo = 50.0;
 
-        Passageiro bruno = new Passageiro();
-        bruno.nome = "Bruno Costa";
-        bruno.saldo = 20.0;
+        ana.adicionarSaldo(100.0);
+        ana.adicionarSaldo(-30.0); // barrado pela validação
+        ana.exibirDados();
 
-        System.out.println(ana.nome + " tem R$ " + ana.saldo);
-        System.out.println(bruno.nome + " tem R$ " + bruno.saldo);
+        boolean pagou = ana.pagar(35.90);
+        System.out.println("Corrida de R$ 35,90 paga? " + pagou);
+
+        boolean pagouCara = ana.pagar(1000.0);
+        System.out.println("Corrida de R$ 1000,00 paga? " + pagouCara);
+
+        ana.exibirDados();
     }
 }
