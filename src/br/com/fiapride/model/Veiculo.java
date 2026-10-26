@@ -69,6 +69,17 @@ public class Veiculo {
         return capacidadePassageiros;
     }
 
+    /**
+     * Quantos km o veículo roda com o tanque/bateria cheios.
+     * Fica na mãe como CONTRATO: assim um loop sobre List&lt;Veiculo&gt; pode chamá-lo.
+     * Cada filha sobrescreve com a sua própria regra.
+     *
+     * @return autonomia em km (0 para um veículo genérico)
+     */
+    public double calcularAutonomia() {
+        return 0;
+    }
+
     public void exibirInfo() {
         System.out.println("Veículo: " + modelo + " | Placa: " + placa
                 + " | Lugares: " + capacidadePassageiros);

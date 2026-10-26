@@ -54,6 +54,17 @@ public class Robo {
         return itensProcessados * 100.0 / total;
     }
 
+    /**
+     * Estima quanto tempo o robô leva para processar um lote.
+     * Contrato na mãe; cada plataforma sobrescreve com o seu overhead real.
+     *
+     * @param quantidadeItens itens no lote
+     * @return tempo estimado em segundos
+     */
+    public double estimarTempoExecucao(int quantidadeItens) {
+        return quantidadeItens * segundosPorItem;
+    }
+
     public void exibirInfo() {
         System.out.printf("Robô: %s | Plataforma: %s | Sucesso: %.1f%%%n",
                 nome, plataforma, calcularTaxaSucesso());

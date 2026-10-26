@@ -15,6 +15,14 @@ public class RoboAutomationAnywhere extends Robo {
         this.botRunnersDisponiveis = botRunnersDisponiveis;
     }
 
+    /**
+     * AA divide o lote entre os Bot Runners, mas gasta ~20s com o Control Room.
+     */
+    @Override
+    public double estimarTempoExecucao(int quantidadeItens) {
+        return 20 + (quantidadeItens * segundosPorItem) / botRunnersDisponiveis;
+    }
+
     public int getBotRunnersDisponiveis() {
         return botRunnersDisponiveis;
     }

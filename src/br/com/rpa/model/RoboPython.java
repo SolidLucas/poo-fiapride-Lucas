@@ -15,6 +15,14 @@ public class RoboPython extends Robo {
         this.versaoPython = versaoPython;
     }
 
+    /**
+     * Python: rápido por item, só paga ~5s para ativar o ambiente virtual.
+     */
+    @Override
+    public double estimarTempoExecucao(int quantidadeItens) {
+        return 5 + quantidadeItens * segundosPorItem;
+    }
+
     public String getVersaoPython() {
         return versaoPython;
     }

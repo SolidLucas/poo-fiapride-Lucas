@@ -23,6 +23,21 @@ public class Moto extends Veiculo {
         this.consumoKmPorLitro = consumoKmPorLitro;
     }
 
+    /**
+     * Moto: tanque x consumo, sem perdas extras.
+     */
+    @Override
+    public double calcularAutonomia() {
+        return capacidadeTanqueLitros * consumoKmPorLitro;
+    }
+
+    @Override
+    public void exibirInfo() {
+        super.exibirInfo();
+        System.out.println("   -> Moto " + cilindradas + " cc | Garupa para "
+                + capacidadePassageiros + " passageiro");
+    }
+
     public int getCilindradas() {
         return cilindradas;
     }

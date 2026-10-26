@@ -25,6 +25,22 @@ public class Carro extends Veiculo {
         this.consumoKmPorLitro = consumoKmPorLitro;
     }
 
+    /**
+     * Carro: tanque x consumo, perdendo 10% com o ar-condicionado ligado.
+     */
+    @Override
+    public double calcularAutonomia() {
+        double autonomia = capacidadeTanqueLitros * consumoKmPorLitro;
+        return arCondicionadoLigado ? autonomia * 0.9 : autonomia;
+    }
+
+    @Override
+    public void exibirInfo() {
+        super.exibirInfo(); // reaproveita a parte comum da mãe
+        System.out.println("   -> Carro " + quantidadePortas + " portas | Ar: "
+                + (arCondicionadoLigado ? "ligado" : "desligado"));
+    }
+
     public int getQuantidadePortas() {
         return quantidadePortas;
     }
