@@ -6,10 +6,10 @@ package br.com.rpa.model;
  */
 public class Robo {
 
-    public String nome;
-    public String plataforma;
-    public int itensProcessados;
-    public int itensComErro;
+    private String nome;
+    private String plataforma;
+    private int itensProcessados;
+    private int itensComErro;
 
     /**
      * Registra o resultado de uma execução do robô.
@@ -36,4 +36,39 @@ public class Robo {
         }
         return itensProcessados * 100.0 / total;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        if (nome == null || nome.isBlank()) {
+            System.out.println("O robô precisa de um nome.");
+            return;
+        }
+        this.nome = nome.trim();
+    }
+
+    public String getPlataforma() {
+        return plataforma;
+    }
+
+    public void setPlataforma(String plataforma) {
+        if (plataforma == null || plataforma.isBlank()) {
+            System.out.println("Informe a plataforma do robô.");
+            return;
+        }
+        this.plataforma = plataforma.trim();
+    }
+
+    public int getItensProcessados() {
+        return itensProcessados;
+    }
+
+    public int getItensComErro() {
+        return itensComErro;
+    }
+
+    // Contadores sem setter: o histórico de execução não pode ser "maquiado"
+    // para melhorar o indicador do robô. Só registrarExecucao() altera.
 }

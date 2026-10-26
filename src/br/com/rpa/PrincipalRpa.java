@@ -6,13 +6,13 @@ public class PrincipalRpa {
 
     public static void main(String[] args) {
         Robo roboNotas = new Robo();
-        roboNotas.nome = "Leitor de Notas Fiscais";
-        roboNotas.plataforma = "Python";
+        roboNotas.setNome("Leitor de Notas Fiscais");
+        roboNotas.setPlataforma("Python");
+        roboNotas.setPlataforma(""); // barrado
 
         roboNotas.registrarExecucao(95, 5);
-        roboNotas.registrarExecucao(-10, 0); // barrado
 
-        System.out.printf("%s -> taxa de sucesso: %.1f%%%n",
-                roboNotas.nome, roboNotas.calcularTaxaSucesso());
+        System.out.printf("%s (%s) -> taxa de sucesso: %.1f%%%n",
+                roboNotas.getNome(), roboNotas.getPlataforma(), roboNotas.calcularTaxaSucesso());
     }
 }

@@ -6,19 +6,13 @@ public class Principal {
 
     public static void main(String[] args) {
         Passageiro ana = new Passageiro();
-        ana.nome = "Ana Silva";
-        ana.saldo = 50.0;
+        ana.setNome("Ana Silva");
+        ana.setNome("   "); // barrado: nome em branco
+        ana.adicionarSaldo(50.0);
 
-        ana.adicionarSaldo(100.0);
-        ana.adicionarSaldo(-30.0); // barrado pela validação
-        ana.exibirDados();
+        // ana.saldo = 1_000_000; -> não compila mais! O atributo é private.
 
-        boolean pagou = ana.pagar(35.90);
-        System.out.println("Corrida de R$ 35,90 paga? " + pagou);
-
-        boolean pagouCara = ana.pagar(1000.0);
-        System.out.println("Corrida de R$ 1000,00 paga? " + pagouCara);
-
-        ana.exibirDados();
+        ana.pagar(35.90);
+        System.out.printf("%s ficou com R$ %.2f%n", ana.getNome(), ana.getSaldo());
     }
 }

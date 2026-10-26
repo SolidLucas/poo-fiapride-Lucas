@@ -6,8 +6,9 @@ package br.com.fiapride.model;
  */
 public class Passageiro {
 
-    public String nome;
-    public double saldo;
+    // private: ninguém de fora mexe direto no dado, só pelos métodos com regra
+    private String nome;
+    private double saldo;
 
     /**
      * Adiciona créditos à carteira. Centralizar a regra aqui evita que
@@ -40,4 +41,23 @@ public class Passageiro {
     public void exibirDados() {
         System.out.printf("Passageiro: %s | Saldo: R$ %.2f%n", nome, saldo);
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        if (nome == null || nome.isBlank()) {
+            System.out.println("Nome inválido: o passageiro precisa de um nome.");
+            return;
+        }
+        this.nome = nome.trim();
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    // Sem setSaldo() de propósito: o saldo só muda via adicionarSaldo() e pagar(),
+    // que aplicam as regras de negócio. Um setSaldo(9999) seria uma porta para fraude.
 }
