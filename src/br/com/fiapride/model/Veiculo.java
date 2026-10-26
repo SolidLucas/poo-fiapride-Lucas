@@ -4,8 +4,11 @@ package br.com.fiapride.model;
  * Classe mãe de todos os veículos do FiapRide.
  * Concentra o que é comum (placa, modelo, lotação) para Carro e Moto
  * não duplicarem código.
+ * <p>
+ * É abstract porque não existe "veículo genérico" no app: todo veículo
+ * real é um Carro, uma Moto etc. Assim ninguém consegue fazer new Veiculo(...).
  */
-public class Veiculo {
+public abstract class Veiculo {
 
     private String placa;
     private final String modelo; // final: o modelo de um carro não muda nunca
@@ -71,14 +74,19 @@ public class Veiculo {
 
     /**
      * Quantos km o veículo roda com o tanque/bateria cheios.
-     * Fica na mãe como CONTRATO: assim um loop sobre List&lt;Veiculo&gt; pode chamá-lo.
-     * Cada filha sobrescreve com a sua própria regra.
+     * Abstrato: a mãe define O QUE fazer, cada filha é OBRIGADA a dizer COMO.
+     * (Antes retornava 0, um valor falso que poderia enganar o sistema.)
      *
-     * @return autonomia em km (0 para um veículo genérico)
+     * @return autonomia em km
      */
-    public double calcularAutonomia() {
-        return 0;
-    }
+    public abstract double calcularAutonomia();
+
+    /**
+     * Preço cobrado por km rodado; cada categoria tem o seu.
+     *
+     * @return valor em reais por km
+     */
+    public abstract double calcularPrecoPorKm();
 
     public void exibirInfo() {
         System.out.println("Veículo: " + modelo + " | Placa: " + placa

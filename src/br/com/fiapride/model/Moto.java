@@ -31,6 +31,14 @@ public class Moto extends Veiculo {
         return capacidadeTanqueLitros * consumoKmPorLitro;
     }
 
+    /**
+     * Corrida de moto é mais barata: gasta menos e leva só 1 passageiro.
+     */
+    @Override
+    public double calcularPrecoPorKm() {
+        return 1.50;
+    }
+
     @Override
     public void exibirInfo() {
         super.exibirInfo();

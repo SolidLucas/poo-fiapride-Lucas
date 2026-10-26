@@ -35,6 +35,11 @@ public class Carro extends Veiculo {
     }
 
     @Override
+    public double calcularPrecoPorKm() {
+        return 2.10;
+    }
+
+    @Override
     public void exibirInfo() {
         super.exibirInfo(); // reaproveita a parte comum da mãe
         System.out.println("   -> Carro " + quantidadePortas + " portas | Ar: "

@@ -10,7 +10,6 @@ package br.com.fiapride.model;
 public class Viagem {
 
     private static final double TARIFA_BASE = 5.00;
-    private static final double PRECO_POR_KM = 2.10;
 
     private final Passageiro solicitante;
     private final Veiculo veiculo;
@@ -30,7 +29,8 @@ public class Viagem {
     }
 
     public double calcularValor() {
-        return TARIFA_BASE + distanciaKm * PRECO_POR_KM;
+        // Polimorfismo: o preço por km vem do tipo real do veículo (Carro, Moto...)
+        return TARIFA_BASE + distanciaKm * veiculo.calcularPrecoPorKm();
     }
 
     /**

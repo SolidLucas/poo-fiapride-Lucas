@@ -11,6 +11,8 @@ import br.com.rpa.model.RoboPython;
 public class PrincipalRpa {
 
     public static void main(String[] args) {
+        // Robo generico = new Robo("?", "?", 1); -> não compila: Robo é abstract
+
         List<Robo> centroDeExcelencia = List.of(
                 new RoboPython("Leitor de Notas Fiscais", "3.12"),
                 new RoboPowerAutomate("Triagem de E-mails", true),
@@ -19,7 +21,6 @@ public class PrincipalRpa {
         int lote = 300;
         System.out.println("=== Estimativa para um lote de " + lote + " itens ===");
         for (Robo robo : centroDeExcelencia) {
-            // Polimorfismo: cada plataforma calcula o tempo à sua maneira
             System.out.printf("%-25s %-20s %6.0f s%n",
                     robo.getNome(), robo.getPlataforma(), robo.estimarTempoExecucao(lote));
         }

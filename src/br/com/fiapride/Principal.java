@@ -12,27 +12,26 @@ import br.com.fiapride.model.Viagem;
 public class Principal {
 
     public static void main(String[] args) {
-        Carro onix = new Carro("ABC1D23", "Chevrolet Onix", 4, 44.0, 13.5);
-        Carro hb20 = new Carro("DEF4G56", "Hyundai HB20", 4, 50.0, 12.0);
-        hb20.setArCondicionadoLigado(true);
-        Moto cg = new Moto("XYZ9A87", "Honda CG 160", 160, 16.0, 40.0);
+        // Veiculo generico = new Veiculo("AAA1111", "?", 1);
+        // -> não compila: Veiculo é abstract, não pode ser instanciado.
 
-        // A lista é de Veiculo, mas guarda Carros e Motos
         List<Veiculo> frota = new ArrayList<>();
-        frota.add(onix);
-        frota.add(hb20);
-        frota.add(cg);
+        frota.add(new Carro("ABC1D23", "Chevrolet Onix", 4, 44.0, 13.5));
+        frota.add(new Moto("XYZ9A87", "Honda CG 160", 160, 16.0, 40.0));
 
         System.out.println("=== Frota FiapRide ===");
         for (Veiculo veiculo : frota) {
-            // Mesma chamada, comportamento diferente: o Java decide em tempo de
-            // execução qual versão de calcularAutonomia() usar (Carro ou Moto).
             veiculo.exibirInfo();
-            System.out.printf("   -> Autonomia: %.0f km%n", veiculo.calcularAutonomia());
+            System.out.printf("   -> Autonomia: %.0f km | R$ %.2f/km%n",
+                    veiculo.calcularAutonomia(), veiculo.calcularPrecoPorKm());
         }
 
+        // Mesma distância, preços diferentes conforme o tipo de veículo
         Passageiro ana = new Passageiro("Ana Silva", 80.0);
-        new Viagem(ana, cg, 7.0).finalizar();
+        for (Veiculo veiculo : frota) {
+            Viagem viagem = new Viagem(ana, veiculo, 10.0);
+            viagem.finalizar();
+        }
         ana.exibirDados();
     }
 }

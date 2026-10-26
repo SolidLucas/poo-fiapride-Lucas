@@ -4,8 +4,11 @@ package br.com.rpa.model;
  * Classe mãe de todos os robôs de automação (RPA).
  * Guarda o que todo robô tem, independentemente da ferramenta:
  * nome, plataforma e indicadores de execução.
+ * <p>
+ * Abstrata: ninguém instala um "robô genérico", ele sempre é feito em
+ * alguma ferramenta (Python, Power Automate, Automation Anywhere...).
  */
-public class Robo {
+public abstract class Robo {
 
     private String nome;
     private final String plataforma; // definida pela filha, não muda depois
@@ -56,14 +59,12 @@ public class Robo {
 
     /**
      * Estima quanto tempo o robô leva para processar um lote.
-     * Contrato na mãe; cada plataforma sobrescreve com o seu overhead real.
+     * Abstrato: cada plataforma é obrigada a informar o seu overhead real.
      *
      * @param quantidadeItens itens no lote
      * @return tempo estimado em segundos
      */
-    public double estimarTempoExecucao(int quantidadeItens) {
-        return quantidadeItens * segundosPorItem;
-    }
+    public abstract double estimarTempoExecucao(int quantidadeItens);
 
     public void exibirInfo() {
         System.out.printf("Robô: %s | Plataforma: %s | Sucesso: %.1f%%%n",
