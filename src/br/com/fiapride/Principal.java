@@ -2,23 +2,22 @@ package br.com.fiapride;
 
 import br.com.fiapride.model.Passageiro;
 import br.com.fiapride.model.Veiculo;
+import br.com.fiapride.model.Viagem;
 
 public class Principal {
 
     public static void main(String[] args) {
-        // Três formas de nascer, todas válidas graças aos construtores
-        Passageiro convidado = new Passageiro();
-        Passageiro bruno = new Passageiro("Bruno Costa");
         Passageiro ana = new Passageiro("Ana Silva", 50.0);
+        Passageiro bruno = new Passageiro("Bruno Costa", 10.0);
+        Veiculo onix = new Veiculo("ABC1D23", "Chevrolet Onix");
 
-        convidado.exibirDados();
-        bruno.exibirDados();
-        ana.exibirDados();
+        Viagem viagemAna = new Viagem(ana, onix, 12.5);
+        viagemAna.exibirResumo();
+        viagemAna.finalizar();
+        viagemAna.exibirResumo();
+        ana.exibirDados(); // o saldo da Ana mudou: a viagem mexeu no objeto real
 
-        Veiculo onix = new Veiculo("ABC1234", "Chevrolet Onix");
-        onix.exibirInfo();
-        onix.atualizarPlaca("ABC1D23", "");              // recusado
-        onix.atualizarPlaca("ABC1D23", "DETRAN-2026-0042"); // processo oficial
-        onix.exibirInfo();
+        Viagem viagemBruno = new Viagem(bruno, onix, 8.0);
+        viagemBruno.finalizar(); // saldo insuficiente
     }
 }
