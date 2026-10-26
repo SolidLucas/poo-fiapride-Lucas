@@ -1,33 +1,31 @@
 package br.com.rpa.model;
 
 /**
- * Desafio pessoal: um robô de automação (RPA) que processa itens
- * de uma fila de trabalho (notas fiscais, e-mails, planilhas...).
+ * Classe mãe de todos os robôs de automação (RPA).
+ * Guarda o que todo robô tem, independentemente da ferramenta:
+ * nome, plataforma e indicadores de execução.
  */
 public class Robo {
 
     private String nome;
-    private String plataforma;
+    private final String plataforma; // definida pela filha, não muda depois
     private int itensProcessados;
     private int itensComErro;
 
-    /**
-     * Construtor padrão: robô ainda sem configuração definida.
-     */
-    public Robo() {
-        this("Robô sem nome", "Não definida");
-    }
+    // protected: cada filha usa esse valor nos próprios cálculos, mas ele
+    // continua invisível para quem está fora da hierarquia de robôs.
+    protected final double segundosPorItem;
 
-    /**
-     * Cria um robô em Python, a plataforma padrão da equipe.
-     */
-    public Robo(String nome) {
-        this(nome, "Python");
-    }
-
-    public Robo(String nome, String plataforma) {
+    public Robo(String nome, String plataforma, double segundosPorItem) {
         setNome(nome);
-        setPlataforma(plataforma);
+        if (plataforma == null || plataforma.isBlank()) {
+            throw new IllegalArgumentException("Informe a plataforma do robô.");
+        }
+        if (segundosPorItem <= 0) {
+            throw new IllegalArgumentException("O tempo por item deve ser positivo.");
+        }
+        this.plataforma = plataforma;
+        this.segundosPorItem = segundosPorItem;
     }
 
     /**
@@ -56,28 +54,24 @@ public class Robo {
         return itensProcessados * 100.0 / total;
     }
 
+    public void exibirInfo() {
+        System.out.printf("Robô: %s | Plataforma: %s | Sucesso: %.1f%%%n",
+                nome, plataforma, calcularTaxaSucesso());
+    }
+
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         if (nome == null || nome.isBlank()) {
-            System.out.println("O robô precisa de um nome.");
-            return;
+            throw new IllegalArgumentException("O robô precisa de um nome.");
         }
         this.nome = nome.trim();
     }
 
     public String getPlataforma() {
         return plataforma;
-    }
-
-    public void setPlataforma(String plataforma) {
-        if (plataforma == null || plataforma.isBlank()) {
-            System.out.println("Informe a plataforma do robô.");
-            return;
-        }
-        this.plataforma = plataforma.trim();
     }
 
     public int getItensProcessados() {

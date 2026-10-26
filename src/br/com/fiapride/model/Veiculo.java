@@ -1,21 +1,31 @@
 package br.com.fiapride.model;
 
 /**
- * Veículo cadastrado por um motorista do FiapRide.
+ * Classe mãe de todos os veículos do FiapRide.
+ * Concentra o que é comum (placa, modelo, lotação) para Carro e Moto
+ * não duplicarem código.
  */
 public class Veiculo {
 
     private String placa;
     private final String modelo; // final: o modelo de um carro não muda nunca
 
+    // protected + final: as filhas podem LER direto (ex.: para montar mensagens),
+    // mas ninguém consegue ALTERAR a lotação depois de criado.
+    protected final int capacidadePassageiros;
+
     /**
      * O construtor obriga placa e modelo: não existe veículo "pela metade" no sistema.
      */
-    public Veiculo(String placa, String modelo) {
+    public Veiculo(String placa, String modelo, int capacidadePassageiros) {
         if (modelo == null || modelo.isBlank()) {
             throw new IllegalArgumentException("O modelo do veículo é obrigatório.");
         }
+        if (capacidadePassageiros < 1) {
+            throw new IllegalArgumentException("O veículo deve levar pelo menos 1 passageiro.");
+        }
         this.modelo = modelo.trim();
+        this.capacidadePassageiros = capacidadePassageiros;
         setPlaca(placa);
     }
 
@@ -55,7 +65,12 @@ public class Veiculo {
 
     // Não existe setModelo(): um Onix não vira um Corolla.
 
+    public int getCapacidadePassageiros() {
+        return capacidadePassageiros;
+    }
+
     public void exibirInfo() {
-        System.out.println("Veículo: " + modelo + " | Placa: " + placa);
+        System.out.println("Veículo: " + modelo + " | Placa: " + placa
+                + " | Lugares: " + capacidadePassageiros);
     }
 }

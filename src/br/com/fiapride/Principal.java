@@ -1,23 +1,27 @@
 package br.com.fiapride;
 
+import br.com.fiapride.model.Carro;
+import br.com.fiapride.model.Moto;
 import br.com.fiapride.model.Passageiro;
-import br.com.fiapride.model.Veiculo;
 import br.com.fiapride.model.Viagem;
 
 public class Principal {
 
     public static void main(String[] args) {
-        Passageiro ana = new Passageiro("Ana Silva", 50.0);
-        Passageiro bruno = new Passageiro("Bruno Costa", 10.0);
-        Veiculo onix = new Veiculo("ABC1D23", "Chevrolet Onix");
+        Passageiro ana = new Passageiro("Ana Silva", 80.0);
 
-        Viagem viagemAna = new Viagem(ana, onix, 12.5);
-        viagemAna.exibirResumo();
-        viagemAna.finalizar();
-        viagemAna.exibirResumo();
-        ana.exibirDados(); // o saldo da Ana mudou: a viagem mexeu no objeto real
+        Carro onix = new Carro("ABC1D23", "Chevrolet Onix", 4, 44.0, 13.5);
+        Moto cg = new Moto("XYZ9A87", "Honda CG 160", 160, 16.0, 40.0);
 
-        Viagem viagemBruno = new Viagem(bruno, onix, 8.0);
-        viagemBruno.finalizar(); // saldo insuficiente
+        // Métodos herdados da mãe, sem uma linha de código repetida
+        onix.exibirInfo();
+        cg.exibirInfo();
+        System.out.println("Portas do Onix: " + onix.getQuantidadePortas());
+        System.out.println("Cilindradas da CG: " + cg.getCilindradas());
+
+        // A Viagem pede um Veiculo, e Carro/Moto SÃO veículos
+        new Viagem(ana, onix, 10.0).finalizar();
+        new Viagem(ana, cg, 5.0).finalizar();
+        ana.exibirDados();
     }
 }
